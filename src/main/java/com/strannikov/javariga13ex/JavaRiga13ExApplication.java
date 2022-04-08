@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JavaRiga13ExApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaRiga13ExApplication.class, args);
+ SpringApplication.run(JavaRiga13ExApplication.class, args);
     }
 
 }
