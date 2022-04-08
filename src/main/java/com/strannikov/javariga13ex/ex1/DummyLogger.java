@@ -1,12 +1,13 @@
 package com.strannikov.javariga13ex.ex1;
 
+import jdk.jfr.Name;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 
 
-@Component
+@Component("DummyLoggerEx1")
 @Slf4j
 public class DummyLogger implements CommandLineRunner {
 
