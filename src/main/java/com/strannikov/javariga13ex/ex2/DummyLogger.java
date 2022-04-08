@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component("DummyLoggerEx2")
 @Slf4j
 public class DummyLogger {
-    public void sayHello() {
-        log.info("hello from DummyLogger");
+    public void sayHello(String text) {
+        log.info(text);
     }
 }

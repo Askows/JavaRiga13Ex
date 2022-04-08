@@ -16,6 +16,6 @@ public class CommandLineRunnerWithSetterInjection implements CommandLineRunner {
 
     @Override
     public void run(final String... args) throws Exception {
-        dummyLogger.sayHello();
+        dummyLogger.sayHello("Hello from CommandLineRunnerWithSetterInjection");
     }
 }

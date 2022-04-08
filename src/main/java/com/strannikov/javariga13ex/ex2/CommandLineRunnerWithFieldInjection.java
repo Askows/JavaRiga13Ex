@@ -11,6 +11,6 @@ public class CommandLineRunnerWithFieldInjection implements CommandLineRunner {
 
     @Override
     public void run(final String... args) throws Exception {
-        dummyLogger.sayHello();
+        dummyLogger.sayHello("Hello from CommandLineRunnerWithFieldInjection");
     }
 }

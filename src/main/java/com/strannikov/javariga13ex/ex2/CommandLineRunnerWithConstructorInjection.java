@@ -14,6 +14,6 @@ public class CommandLineRunnerWithConstructorInjection implements CommandLineRun
 
     @Override
     public void run(final String... args) throws Exception {
-        dummyLogger.sayHello();
+        dummyLogger.sayHello("Hello from CommandLineRunnerWithConstructorInjection");
     }
 }
