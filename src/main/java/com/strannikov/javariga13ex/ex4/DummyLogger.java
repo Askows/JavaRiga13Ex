@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DummyLogger {
 
-    private void sayHi() {
-        log.info("Hi from zadanie4");
+    public void sayHi(int result, String sentence) {
+        log.info(result + " " + sentence);
     }
 }
