@@ -5,12 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class BigLazer implements Gun{
-
-
+public class SmallLazer implements Gun{
     @Override
     public int shoot() {
-      log.info("WAB! WAB WAB! WAB!");
-      return 10;
+      log.info("pif-paf");
+      return 3;
     }
 }

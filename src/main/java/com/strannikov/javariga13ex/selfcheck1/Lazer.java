@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 public class Lazer implements Gun {
     @Value("${lazer.shoot.sound:Pew Pew}")
     private String shootingSound;
-    public void shoot(){
+    public int shoot(){
         log.info(shootingSound);
+        return 6;
     }
 }
