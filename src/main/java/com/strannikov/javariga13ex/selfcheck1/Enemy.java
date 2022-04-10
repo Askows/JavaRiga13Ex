@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class Enemy  {
 
-    private final  Gun bigLazer;
+    private   Gun bigLazer;
 
     public Enemy(@Qualifier("bigLazer") Gun bigLazer) {
         this.bigLazer = bigLazer;
@@ -18,4 +17,7 @@ public class Enemy  {
     }
 
 
+    public void setBigLazer(Gun bigLazer) {
+        this.bigLazer = bigLazer;
+    }
 }

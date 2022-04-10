@@ -7,12 +7,16 @@ import org.springframework.stereotype.Component;
 
 public class AnotherEnemy {
 
-    private final Gun smallLazer;
+    private  Gun smallLazer;
 
     public AnotherEnemy(@Qualifier("smallLazer") Gun smallLazer) {
         this.smallLazer = smallLazer;
     }
     public int shoot(){
        return smallLazer.shoot();
+    }
+
+    public void setSmallLazer(Gun smallLazer) {
+        this.smallLazer = smallLazer;
     }
 }

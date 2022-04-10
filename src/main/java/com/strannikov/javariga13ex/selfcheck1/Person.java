@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Person  {
 
-   private  Gun lazer;
+
+    private  Gun lazer;
 
     public Person(@Qualifier("lazer") Gun lazer) {
         this.lazer = lazer;
@@ -16,7 +17,9 @@ public class Person  {
        return lazer.shoot();
    }
 
-
+    public void setLazer(Gun lazer) {
+        this.lazer = lazer;
+    }
 
 
 }
