@@ -24,9 +24,10 @@ public class ShootingRange implements CommandLineRunner {
         int low = 0;
         int high = 2;
         int result = r.nextInt(high-low)+low;
-
+        log.info(result+"");
         enemy.setBigLazer(weapons.get(result));
         result = r.nextInt(high-low)+low;
+        log.info(result+"");
         person.setLazer(weapons.get(result));
         if(person.shoot() > enemy.shoot()){
         log.info(person.getClass()+" wins");
