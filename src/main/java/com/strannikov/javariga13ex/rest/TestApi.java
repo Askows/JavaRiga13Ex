@@ -45,7 +45,7 @@ public class TestApi {
     public List<Person> getAll() {
         return db;
     }
-
+        //DELETE
     @DeleteMapping("/{name}")
     public String delete(@PathVariable("name") String firstName) {
         for (Person person1 : db) {
