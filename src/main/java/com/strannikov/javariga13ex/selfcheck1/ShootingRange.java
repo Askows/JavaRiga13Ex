@@ -1,5 +1,6 @@
 package com.strannikov.javariga13ex.selfcheck1;
 
+import com.strannikov.javariga13ex.ex6.CustomConfigurationComponent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

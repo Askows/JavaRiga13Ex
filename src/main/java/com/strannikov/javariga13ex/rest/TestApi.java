@@ -1,13 +1,17 @@
 package com.strannikov.javariga13ex.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.h2.expression.Variable;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Profile("dev")
 @RestController
 @RequiredArgsConstructor
 public class TestApi {
@@ -23,15 +27,14 @@ public class TestApi {
     ///SAVE!
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Person saveName(@RequestBody Person person) {
-
+    public Person savePerson(@Valid @RequestBody Person person) {
         return personRepository.save(person);
     }
 
     // UPDATE!!!
     @PutMapping("/{name}")
     public String updateAllPersonsWithName(@PathVariable("name") String firstName,
-                                           @RequestBody Person person) {
+                                           @Valid @RequestBody Person person) {
         //1. Find all persons with firstname
         //Also add function findByname to PersonRepository
         List<Person> allPersonsWithName
@@ -59,7 +62,10 @@ public class TestApi {
 
     //DELETE
     @DeleteMapping("/{name}")
-    public String delete(@PathVariable("name") String firstName) {
+    public String delete(@PathVariable("name") String firstName) throws NameException {
+        if(firstName.matches(".*\\d.*")){
+            throw  new NameException("Name must not contain numbers");
+        }
         List<Person> person = personRepository.findByName(firstName);
 
         if (person != null && person.size() > 0) {
