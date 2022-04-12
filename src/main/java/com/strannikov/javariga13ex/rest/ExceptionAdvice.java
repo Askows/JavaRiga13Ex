@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
 public class ExceptionAdvice {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity handleBindingErrors(MethodArgumentNotValidException exception) {
-        return ResponseEntity.badRequest()
-                .body(exception.getAllErrors().stream()
+        return ResponseEntity.
+                badRequest()
+                .body(exception.getAllErrors()
+                        .stream()
                         .map(e -> e.getDefaultMessage())
                         .collect(Collectors.toList()));
     }

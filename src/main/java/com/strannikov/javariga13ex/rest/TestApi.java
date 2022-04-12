@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.h2.expression.Variable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
