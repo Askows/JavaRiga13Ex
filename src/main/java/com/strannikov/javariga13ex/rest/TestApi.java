@@ -31,7 +31,7 @@ public class TestApi {
     // UPDATE!!!
     @PutMapping("/{name}")
     public String updateAllPersonsWithName(@PathVariable("name") String firstName,
-                             @RequestBody Person person) {
+                                           @RequestBody Person person) {
         //1. Find all persons with firstname
         //Also add function findByname to PersonRepository
         List<Person> allPersonsWithName
@@ -41,11 +41,11 @@ public class TestApi {
         //Used stream all new date get from Request body
         //And Save in new List!
         List<Person> newPersons = allPersonsWithName
-                .stream().map(personFromList ->{
-            personFromList.setAge(person.getAge());
-            personFromList.setName(person.getName());
-            return personFromList;
-        })
+                .stream().map(personFromList -> {
+                    personFromList.setAge(person.getAge());
+                    personFromList.setName(person.getName());
+                    return personFromList;
+                })
                 .collect(Collectors.toList());
 
         personRepository.saveAll(newPersons);
@@ -56,15 +56,17 @@ public class TestApi {
     public List<Person> getAll() {
         return personRepository.findAll();
     }
-        //DELETE
+
+    //DELETE
     @DeleteMapping("/{name}")
     public String delete(@PathVariable("name") String firstName) {
-//        for (Person person1 : personRepository) {
-//            if (person1.getName().equals(firstName)) {
-//                personRepository.delete(person1);
-//                return "Deleted";
-//            }
-//        }
+        List<Person> person = personRepository.findByName(firstName);
+
+        if (person != null && person.size() > 0) {
+            personRepository.deleteAll(person);
+            return "Deleted";
+        }
+
         return "Not deleted";
     }
 }
