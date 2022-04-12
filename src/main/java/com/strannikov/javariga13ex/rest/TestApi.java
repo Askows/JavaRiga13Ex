@@ -1,17 +1,18 @@
 package com.strannikov.javariga13ex.rest;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/test")
-
+@RequiredArgsConstructor
 public class TestApi {
-    private List<Person> db = new ArrayList<>();
-
+    //Repository wich work with dataBase
+    private final PersonRepository personRepository;
 
     //GET!!!
     @GetMapping("/hello/{name}")
@@ -23,37 +24,47 @@ public class TestApi {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Person saveName(@RequestBody Person person) {
-        db.add(person);
-        return person;
+
+        return personRepository.save(person);
     }
 
     // UPDATE!!!
     @PutMapping("/{name}")
-    public Person updateName(@PathVariable("name") String firstName,
+    public String updateAllPersonsWithName(@PathVariable("name") String firstName,
                              @RequestBody Person person) {
-        for (Person person1 : db) {
-            if (person1.getName().equals(firstName)) {
-                person1.setName(person.getName());
-                person1.setAge(person.getAge());
+        //1. Find all persons with firstname
+        //Also add function findByname to PersonRepository
+        List<Person> allPersonsWithName
+                = personRepository.findByName(firstName);
 
-            }
-        }
-        return person;
+        //Create new list with changed persons
+        //Used stream all new date get from Request body
+        //And Save in new List!
+        List<Person> newPersons = allPersonsWithName
+                .stream().map(personFromList ->{
+            personFromList.setAge(person.getAge());
+            personFromList.setName(person.getName());
+            return personFromList;
+        })
+                .collect(Collectors.toList());
+
+        personRepository.saveAll(newPersons);
+        return "Updated";
     }
 
     @GetMapping
     public List<Person> getAll() {
-        return db;
+        return personRepository.findAll();
     }
         //DELETE
     @DeleteMapping("/{name}")
     public String delete(@PathVariable("name") String firstName) {
-        for (Person person1 : db) {
-            if (person1.getName().equals(firstName)) {
-                db.remove(person1);
-                return "Deleted";
-            }
-        }
+//        for (Person person1 : personRepository) {
+//            if (person1.getName().equals(firstName)) {
+//                personRepository.delete(person1);
+//                return "Deleted";
+//            }
+//        }
         return "Not deleted";
     }
 }
