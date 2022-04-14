@@ -49,7 +49,8 @@
     <div class="container">
         <div class="row">
             <div class="col order-last">
-                First in DOM, ordered last
+                <a th:text="${userName}"></a>
+                <a>Hello</a>
             </div>
             <div class="col">
                 Second in DOM, unordered
@@ -59,8 +60,14 @@
             </div>
         </div>
     </div>
+    <form th:object="${newPet}" th:action="@{/pet/save}" method="post">
+        <label>Name<input th:field="${newPet.name}" type="text"></label>
+        <label>Age<input th:field="${newPet.age}" type="number"></label>
+        <label>type<input th:field="${newPet.type}" type="text"></label>
+        <input type="submit">
+    </form>
 </main>
-<h1>Hello <p th:text="${userName}"></p> </h1>
+
 
 </body>
 </html>
