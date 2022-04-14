@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class FileData {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String fileName;
     private String extension;
