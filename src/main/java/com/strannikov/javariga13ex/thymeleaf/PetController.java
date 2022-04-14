@@ -5,24 +5,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-
-public class HelloController {
+@RequestMapping("/pet")
+public class PetController {
 
     private final PetRepository petRepository;
 
-    @GetMapping("/hello")
-    public String showHello(final ModelMap modelMap) {
+    @GetMapping
+    public String showHomePage(final ModelMap modelMap) {
         modelMap.addAttribute("userName","Andrew");
         modelMap.addAttribute("newPet",new Pet());
         return "welcome";
     }
 
-    @PostMapping("/pet/save")
+    @PostMapping("/save")
     public String savePet(Pet pet){
         petRepository.save(pet);
-        return "redirect:/hello";
+        return "redirect:/pet";
     }
+    @GetMapping("/all")
+    public String showAllPets(final ModelMap modelMap){
+        modelMap.addAttribute("petList",petRepository.findAll());
+        return "pet-list";
+    }
+
 }

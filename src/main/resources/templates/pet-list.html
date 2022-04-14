@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of All Pets</title>
+    <div th:replace="fragments/head :: bootstrap"></div>
+</head>
+<body>
+<div th:replace="fragments/navigation :: navbar">...</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pet : ${petList}">
+        <td th:text="${pet.name}">Mark</td>
+        <td th:text="${pet.age}">Otto</td>
+        <td th:text="${pet.type}">@mdo</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
