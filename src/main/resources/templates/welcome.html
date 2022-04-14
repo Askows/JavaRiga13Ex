@@ -5,6 +5,7 @@
     <title>Hello page</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.0.1/css/bootstrap.min.css">
     <script src="/webjars/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <header>
@@ -51,21 +52,40 @@
             <div class="col order-last">
                 <a th:text="${userName}"></a>
                 <a>Hello</a>
+
             </div>
             <div class="col">
                 Second in DOM, unordered
             </div>
             <div class="col order-first">
-                Third in DOM, ordered first
+                <h1>Fill in pet info</h1>
+                <form th:object="${newPet}" th:action="@{/pet/save}" method="post">
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input th:field="${newPet.name}" type="text" class="form-control" id="inputEmail3">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Age</label>
+                        <div class="col-sm-10">
+                            <input th:field="${newPet.age}" type="number" class="form-control" id="inputPassword3">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Type</label>
+                        <div class="col-sm-10">
+                            <input th:field="${newPet.type}" type="text" class="form-control" id="Type">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
             </div>
         </div>
     </div>
-    <form th:object="${newPet}" th:action="@{/pet/save}" method="post">
-        <label>Name<input th:field="${newPet.name}" type="text"></label>
-        <label>Age<input th:field="${newPet.age}" type="number"></label>
-        <label>type<input th:field="${newPet.type}" type="text"></label>
-        <input type="submit">
-    </form>
+
+
+
 </main>
 
 
