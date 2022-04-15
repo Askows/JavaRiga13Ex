@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PC Game</title>
+    <div th:replace="fragments/head :: bootstrap"></div>
+</head>
+<body>
+<div th:replace="fragments/navigation :: navbar">...</div>
+<div th:text="${createMessage}"></div>
+<form th:object="${pcGameForm}" method="post" th:action="@{/pc-game}">
+    <input th:field="*{title}" type="text">
+    <input th:field="${pcGameForm.producer}" type="text">
+    <input th:field="${pcGameForm.genre}" type="text">
+    <input th:field="${pcGameForm.minimumAge}" type="number">
+    <input th:field="${pcGameForm.isAAA}" type="checkbox">
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
