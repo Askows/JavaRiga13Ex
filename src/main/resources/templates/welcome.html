@@ -14,7 +14,9 @@
     <div class="container">
         <div class="row">
             <div class="col order-last">
-                <a th:text="${userName}"></a>
+                <a th:text="${userLoginName}"></a>
+<!--                both ways is correct!-->
+<!--                <a sec:authentication="name"></a>-->
                 <a>Hello</a>
 
                 <div class="col order-first">

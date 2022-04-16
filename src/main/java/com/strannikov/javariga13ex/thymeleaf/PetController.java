@@ -2,6 +2,7 @@ package com.strannikov.javariga13ex.thymeleaf;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
@@ -25,6 +26,8 @@ public class PetController {
 
     @GetMapping
     public String showHomePage(final ModelMap modelMap) {
+        String name =  SecurityContextHolder.getContext().getAuthentication().getName();
+        modelMap.addAttribute("userLoginName",name);
         modelMap.addAttribute("userName","Andrew");
         modelMap.addAttribute("newPet",new Pet());
         return "welcome";
