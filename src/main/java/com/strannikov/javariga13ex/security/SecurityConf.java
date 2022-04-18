@@ -1,5 +1,6 @@
 package com.strannikov.javariga13ex.security;
 
+import com.strannikov.javariga13ex.security.service.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

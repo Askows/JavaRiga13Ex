@@ -1,5 +1,10 @@
-package com.strannikov.javariga13ex.security;
+package com.strannikov.javariga13ex.security.controller;
 
+import com.strannikov.javariga13ex.security.model.Role;
+import com.strannikov.javariga13ex.security.model.RoleName;
+import com.strannikov.javariga13ex.security.model.User;
+import com.strannikov.javariga13ex.security.repository.RoleRepo;
+import com.strannikov.javariga13ex.security.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,11 +13,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder encoder;
 
     @GetMapping("/login")
@@ -31,7 +40,8 @@ public class UserController {
     @PostMapping("/register")
     public String register(User user){
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setRoles("USER");
+        Optional<Role> roleOptional = roleRepo.findById(RoleName.USER.toString());
+        user.setRoles(List.of(roleOptional.get()));
         userRepo.save(user);
         return "redirect:/pet";
     }

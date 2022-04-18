@@ -1,13 +1,12 @@
 package com.strannikov.javariga13ex.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.h2.expression.Variable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Profile("dev")
@@ -53,7 +52,7 @@ public class TestApi {
         personRepository.saveAll(newPersons);
         return "Updated";
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping
     public List<Person> getAll() {
         return personRepository.findAll();
