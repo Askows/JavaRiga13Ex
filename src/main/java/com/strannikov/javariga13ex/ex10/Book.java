@@ -1,6 +1,7 @@
 package com.strannikov.javariga13ex.ex10;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @Entity(name ="books")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
