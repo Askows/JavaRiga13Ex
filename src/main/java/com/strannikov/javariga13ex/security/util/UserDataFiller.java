@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -25,10 +28,11 @@ public class UserDataFiller implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-       List<Role> roles =  roleRepo
-                .saveAll(List.of(Role.builder()
-                        .name(RoleName.USER.toString())
-                        .build()));
+        Set<Role> roles = roleRepo.saveAll(List.of(
+                Role.builder().name(RoleName.USER.toString()).build(),
+                Role.builder().name(RoleName.ADMIN.toString()).build()
+        )).stream().collect(Collectors.toSet());
+
 
         if(roles==null){
             log.error("Roles not saved");
@@ -36,22 +40,24 @@ public class UserDataFiller implements CommandLineRunner {
         }
         log.info("Roles not saved");
 
-        userRepo.saveAll(List.of(
-                User.builder()
-                        .username("Andrew")
-                        .password(encoder.encode("123") )
-                        .roles(roles)
-                        .build(),
-                User.builder()
-                        .username("Andrew1")
-                        .password(encoder.encode("123") )
-                        .roles(List.of(roles.get(0)))
-                        .build(),
-                User.builder()
-                        .username("Andrew2")
-                        .password(encoder.encode("123") )
-                        .roles(List.of(roles.get(1)))
-                        .build()
+        userRepo.saveAll(
+                List.of(
+                        User.builder()
+                                .username("Andrew")
+                                .password(encoder.encode("123"))
+                                .roles(roles)
+                                .build(),
+                        User.builder()
+                                .username("Andrew1")
+                                .password(encoder.encode("123"))
+                                .roles(roles)
+                                .build(),
+                        User.builder()
+                                .username("Andrew2")
+                                .password(encoder.encode("123"))
+                                .roles(roles)
+                                .build()
+
 
         ));
     }

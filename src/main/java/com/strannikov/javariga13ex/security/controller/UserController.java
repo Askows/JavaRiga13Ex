@@ -13,8 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,8 +39,8 @@ public class UserController {
     @PostMapping("/register")
     public String register(User user){
         user.setPassword(encoder.encode(user.getPassword()));
-        Optional<Role> roleOptional = roleRepo.findById(RoleName.USER.toString());
-        user.setRoles(List.of(roleOptional.get()));
+        Role roleOptional = roleRepo.findByName(RoleName.USER.toString());
+        user.setRoles(Set.of(roleOptional));
         userRepo.save(user);
         return "redirect:/pet";
     }
